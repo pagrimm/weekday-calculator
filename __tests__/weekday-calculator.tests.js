@@ -28,10 +28,6 @@ describe('Weekday Calculator', () => {
     expect(checkDate(2000, 3, 31)).toEqual(false);
   });
 
-  test('should return day of the week', () => {
-    expect(returnDayOfWeek(1)).toEqual('Monday');
-  });
-
   test('should return number of days from entered date to Jan 1 1970, if day is the same and there are no leap years between', () => {
     expect(getNumberOfDays(1971, 0, 1)).toEqual(365);
   });
@@ -42,5 +38,13 @@ describe('Weekday Calculator', () => {
 
   test('should return number of days between entered date and Jan 1 1970, if year is less than 1970', () => {
     expect(getNumberOfDays(1969, 0, 1)).toEqual(365);
+  });
+
+  test('should return the day of the week for the given date if year is after 1970', () => {
+    expect(returnDayOfWeek(getNumberOfDays(2000, 0, 1))).toEqual('Saturday');
+  });
+
+  test('should return the day of the week for the given date if year is before 1970', () => {
+    expect(returnDayOfWeek(getNumberOfDays(1776, 7, 2))).toEqual('Friday');
   });
 });
