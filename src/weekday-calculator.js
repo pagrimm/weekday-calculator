@@ -2,7 +2,7 @@ export function checkDate (year, month, day) {
   let months30 = [8, 3, 5, 10];
   if ((month === 1 && day > 28 && !checkIfLeapYear(year)) || (month === 1 && day > 29 && checkIfLeapYear(year))) {
     return false;
-  } else if (typeof year === "number" && month >= 0 && month <= 11 && day >= 0 && day <= 31 && !months30.includes(month)) {
+  } else if ((typeof year === "number" && month >= 0 && month <= 11) && ((day >= 0 && day <= 31 && !months30.includes(month)) || ((day >= 0 && day <= 30 && months30.includes(month))))) {
     return true;
   }
   return false;
