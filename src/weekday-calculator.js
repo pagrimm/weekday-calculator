@@ -37,7 +37,7 @@ export function getNumberOfDays (year, month, day) {
   let months30 = [8, 3, 5, 10];
   let startYear = 0;
   let endYear = 0;
-  if (year > 1970) {
+  if (year >= 1970) {
     startYear = 1970;
     endYear = year;
   } else {
@@ -51,19 +51,36 @@ export function getNumberOfDays (year, month, day) {
       days += 365;
     }
   }
-  for (let i = 0; i < month - 1; i++) {
-    if (checkIf30Month(month)) {
-      days += 30;
-    } else if (i === 1 && checkIfLeapYear(year)) {
-      days += 29;
-    } else if (i === 1 && !checkIfLeapYear(year)) {
-      days += 28;
-    } else {
-      days += 31;
+  if (year >= 1970) {
+    for (let i = 0; i < month; i++) {
+      if (checkIf30Month(i)) {
+        days += 30;
+      } else if (i === 1 && checkIfLeapYear(year)) {
+        days += 29;
+      } else if (i === 1 && !checkIfLeapYear(year)) {
+        days += 28;
+      } else {
+        days += 31;
+      }
     }
-  }
-  for (let i = 0; i < day - 1; i++) {
-    days += 1;
+    for (let i = 0; i < day - 1; i++) {
+      days += 1;
+    }
+  } else {
+    for (let i = 0; i < month; i++) {
+      if (checkIf30Month(i)) {
+        days -= 30;
+      } else if (i === 1 && checkIfLeapYear(year)) {
+        days -= 29;
+      } else if (i === 1 && !checkIfLeapYear(year)) {
+        days -= 28;
+      } else {
+        days -= 31;
+      }
+    }
+    for (let i = 0; i < day - 1; i++) {
+      days -= 1;
+    }
   }
   return days;
 }
