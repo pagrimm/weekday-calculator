@@ -1,5 +1,6 @@
 import { checkDate } from './../src/weekday-calculator.js';
 import { returnDayOfWeek } from './../src/weekday-calculator.js';
+import { getNumberOfDays } from './../src/weekday-calculator.js';
 
 describe('Weekday Calculator', () => {
 
@@ -28,6 +29,10 @@ describe('Weekday Calculator', () => {
   });
 
   test('should return day of the week', () => {
-    expect(returnDayOfWeek(1)).toEqual('Sunday');
+    expect(returnDayOfWeek(1)).toEqual('Monday');
+  });
+
+  test('should return number of days from entered date to Jan 1 1970', () => {
+    expect(getNumberOfDays(1971, 0, 1)).toEqual(365);
   });
 });

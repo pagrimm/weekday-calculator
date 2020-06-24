@@ -21,3 +21,7 @@ export function returnDayOfWeek(day) {
   let weekday = daysOfTheWeek[day];
   return weekday;
 }
+
+export function getNumberOfDays (year, month, day) {
+  return false;
+}
