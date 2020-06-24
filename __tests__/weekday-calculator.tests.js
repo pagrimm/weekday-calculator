@@ -15,6 +15,10 @@ describe('Weekday Calculator', () => {
   });
 
   test('should not be able to enter greater than 29 for febuary on leap years', () => {
-    expect(checkDate(2000, 1, 31)).toEqual(true);
+    expect(checkDate(2000, 1, 31)).toEqual(false);
+  });
+
+  test('should not be able to enter greater than 29 for febuary on leap years', () => {
+    expect(checkDate(2000, 1, 31)).toEqual(false);
   });
 });
