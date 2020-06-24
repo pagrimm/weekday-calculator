@@ -1,4 +1,5 @@
 import { checkDate } from './../src/weekday-calculator.js';
+import { returnDayOfWeek } from './../src/weekday-calculator.js';
 
 describe('Weekday Calculator', () => {
 
@@ -24,5 +25,9 @@ describe('Weekday Calculator', () => {
 
   test('should not be ableto enter greater than 30 for September, April, June, and November', () => {
     expect(checkDate(2000, 3, 31)).toEqual(false);
+  });
+
+  test('should return day of the week', () => {
+    expect(returnDayOfWeek(1)).toEqual('Sunday');
   });
 });

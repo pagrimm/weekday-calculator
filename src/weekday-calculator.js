@@ -16,4 +16,8 @@ function checkIfLeapYear(year) {
   }
 }
 
-// ((year % 4 === 0) && (year % 100 != 0)) || (year % 400 === 0)
+export function returnDayOfWeek(day) {
+  const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  let weekday = daysOfTheWeek[day];
+  return weekday;
+}
