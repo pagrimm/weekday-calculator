@@ -23,5 +23,9 @@ export function returnDayOfWeek(day) {
 }
 
 export function getNumberOfDays (year, month, day) {
-  return false;
+  let days = 0;
+  for (let i = 1970; i < year ; i++) {
+    days += 365;
+  }
+  return days;
 }
