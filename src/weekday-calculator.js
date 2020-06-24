@@ -16,6 +16,15 @@ function checkIfLeapYear(year) {
   }
 }
 
+function checkIf30Month(month) {
+  let months30 = [8, 3, 5, 10];
+  if (months30.includes(month)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 export function returnDayOfWeek(day) {
   const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   let weekday = daysOfTheWeek[day];
@@ -24,8 +33,36 @@ export function returnDayOfWeek(day) {
 
 export function getNumberOfDays (year, month, day) {
   let days = 0;
-  for (let i = 1970; i < year ; i++) {
-    days += 365;
+  let months30 = [8, 3, 5, 10];
+  let startYear = 0;
+  let endYear = 0;
+  if (year > 1970) {
+    startYear = 1970;
+    endYear = year;
+  } else {
+    startYear = year;
+    endYear = 1970;
+  }
+  for (let i = startYear; i < endYear ; i++) {
+    if (checkIfLeapYear(year)) {
+      days += 366;
+    } else {
+      days += 365;
+    }
+  }
+  for (let i = 0; i < month - 1; i++) {
+    if (checkIf30Month(month)) {
+      days += 30;
+    } else if (month === 1 && checkIfLeapYear(year)) {
+      days += 29;
+    } else if (month === 1 && !checkIfLeapYear(year)) {
+      days += 28;
+    } else {
+      days += 31;
+    }
+  }
+  for (let i = 0; i < day - 1; i++) {
+    days += 1;
   }
   return days;
 }

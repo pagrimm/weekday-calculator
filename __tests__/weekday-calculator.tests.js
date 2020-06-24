@@ -39,4 +39,8 @@ describe('Weekday Calculator', () => {
   test('should return number of days from entered date to Jan 1 1970, if day is not the same', () => {
     expect(getNumberOfDays(1971, 0, 2)).toEqual(366);
   });
+
+  test('should return number of days between entered date and Jan 1 1970, if year is less than 1970', () => {
+    expect(getNumberOfDays(1969, 0, 1)).toEqual(365);
+  });
 });
