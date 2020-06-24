@@ -2,7 +2,7 @@ export function checkDate (year, month, day) {
   let months30 = [8, 3, 5, 10];
   if ((month === 1 && day > 28 && !checkIfLeapYear(year)) || (month === 1 && day > 29 && checkIfLeapYear(year))) {
     return false;
-  } else if ((typeof year === "number" && month >= 0 && month <= 11) && ((day >= 0 && day <= 31 && !months30.includes(month)) || ((day >= 0 && day <= 30 && months30.includes(month))))) {
+  } else if ((typeof year === "number" && year > 0 && month >= 0 && month <= 11) && ((day >= 0 && day <= 31 && !months30.includes(month)) || ((day >= 0 && day <= 30 && months30.includes(month))))) {
     return true;
   }
   return false;
@@ -25,16 +25,21 @@ function checkIf30Month(month) {
   }
 }
 
-export function returnDayOfWeek(days) {
+export function returnDayOfWeek(days, year) {
   const day = days % 7;
-  const daysOfTheWeek = ['Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday'];
-  let weekday = daysOfTheWeek[day];
+  const daysOfTheWeekUp = ['Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday'];
+  const daysOfTheWeekDown = ['Thursday', 'Wednesday', 'Tuesday', 'Monday', 'Sunday', 'Saturday', 'Friday'];
+  let weekday;
+  if (year >= 1970) {
+    weekday = daysOfTheWeekUp[day];
+  } else {
+    weekday = daysOfTheWeekDown[day];
+  }
   return weekday;
 }
 
 export function getNumberOfDays (year, month, day) {
   let days = 0;
-  let months30 = [8, 3, 5, 10];
   let startYear = 0;
   let endYear = 0;
   if (year >= 1970) {
@@ -45,8 +50,10 @@ export function getNumberOfDays (year, month, day) {
     endYear = 1970;
   }
   for (let i = startYear; i < endYear; i++) {
-    if (checkIfLeapYear(i)) {
+    if (checkIfLeapYear(i) && i !== 0) {
       days += 366;
+    } else if (i === 0) {
+      continue;
     } else {
       days += 365;
     }

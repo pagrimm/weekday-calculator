@@ -20,12 +20,12 @@ describe('Weekday Calculator', () => {
     expect(checkDate(2000, 1, 31)).toEqual(false);
   });
 
-  test('should by able to enter negative numbers', () => {
-    expect(checkDate(-2000, 1, 29)).toEqual(true);
-  });
-
   test('should not be ableto enter greater than 30 for September, April, June, and November', () => {
     expect(checkDate(2000, 3, 31)).toEqual(false);
+  });
+
+  test('should not be able to enter a negative value for year', () => {
+    expect(checkDate(-2000, 3, 6)).toEqual(false);
   });
 
   test('should return number of days from entered date to Jan 1 1970, if day is the same and there are no leap years between', () => {
@@ -41,10 +41,23 @@ describe('Weekday Calculator', () => {
   });
 
   test('should return the day of the week for the given date if year is after 1970', () => {
-    expect(returnDayOfWeek(getNumberOfDays(2000, 0, 1))).toEqual('Saturday');
+    expect(returnDayOfWeek(getNumberOfDays(2000, 0, 1), 2000)).toEqual('Saturday');
+  });
+
+  test('should return the day of the week for the given date if year is after 1970 #2', () => {
+    expect(returnDayOfWeek(getNumberOfDays(2020, 4, 15), 2020)).toEqual('Friday');
   });
 
   test('should return the day of the week for the given date if year is before 1970', () => {
-    expect(returnDayOfWeek(getNumberOfDays(1776, 7, 2))).toEqual('Friday');
+    expect(returnDayOfWeek(getNumberOfDays(1776, 7, 2), 1776)).toEqual('Friday');
   });
+
+  test('should return the day of the week for the given date if year is before 1970 #2', () => {
+    expect(returnDayOfWeek(getNumberOfDays(1516, 3, 13), 1516)).toEqual('Thursday');
+  });
+
+  test('should return the day of the week for the given date if year is before 1970 #3', () => {
+    expect(returnDayOfWeek(getNumberOfDays(1492, 7, 3), 1492)).toEqual('Wednesday');
+  });
+  
 });
